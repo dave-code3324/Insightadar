@@ -54,3 +54,27 @@ void test("exclut un conseil d’investissement personnel", () => {
   assert.equal(result.isRelevant, false);
   assert.ok(result.relevanceReasons.some((reason) => reason.includes("finances personnelles")));
 });
+
+void test("exclut un faux positif hors sujet", () => {
+  const result = scoreDiscussion(
+    discussion({
+      subreddit: "PromptEngineering",
+      title: "A prompt containing a financial advisor CRM example",
+      content: "This generic prompt mentions software, workflow and client acquisition.",
+      commentsCount: 20,
+    }),
+  );
+  assert.equal(result.isRelevant, false);
+  assert.ok(result.relevanceReasons.some((reason) => reason.includes("communauté hors marché")));
+});
+
+void test("retient un cas ambigu exactement au seuil de 60", () => {
+  const result = scoreDiscussion(
+    discussion({
+      subreddit: "CFP",
+      title: "Which software do advisors use?",
+    }),
+  );
+  assert.equal(result.relevanceScore, 60);
+  assert.equal(result.isRelevant, true);
+});

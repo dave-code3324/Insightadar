@@ -51,7 +51,7 @@ jobs:
           APIFY_COMMENTS_ACTOR_ID: crawlerbros~reddit-comment-scraper-pro
           MAX_RELEVANT_DISCUSSIONS: "20"
           MAX_COMMENTS_PER_DISCUSSION: "50"
-          MIN_COMMENT_SCORE: "1"
+          MIN_COMMENT_SCORE: "-10000"
 
       - name: Upload collected discussions
         uses: actions/upload-artifact@v4

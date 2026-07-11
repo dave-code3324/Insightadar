@@ -83,7 +83,7 @@ npm run collect:comments
 | `APIFY_COMMENTS_ACTOR_ID`     | Non         | `crawlerbros~reddit-comment-scraper-pro` |
 | `MAX_RELEVANT_DISCUSSIONS`    | Non         | `100`                                    |
 | `MAX_COMMENTS_PER_DISCUSSION` | Non         | `100`                                    |
-| `MIN_COMMENT_SCORE`           | Non         | `1`                                      |
+| `MIN_COMMENT_SCORE`           | Non         | `-10000`                                 |
 
 L’Actor choisi accepte une seule recherche par exécution. InsightRadar effectue donc cinq exécutions séquentielles, conformément aux cinq requêtes du marché.
 
@@ -92,7 +92,9 @@ Pour un premier test maîtrisé :
 ```dotenv
 MAX_RELEVANT_DISCUSSIONS=20
 MAX_COMMENTS_PER_DISCUSSION=50
-MIN_COMMENT_SCORE=1
+MIN_COMMENT_SCORE=-10000
 ```
+
+Le premier test conserve tous les scores de commentaires. `MIN_COMMENT_SCORE` est réservé à une future étape d’analyse et n’est pas appliqué pendant la collecte brute. Seuls les doublons et les contenus vides sont retirés.
 
 Le workflow GitHub Actions applique automatiquement ces limites et publie les cinq fichiers JSON comme artefact pendant 7 jours.

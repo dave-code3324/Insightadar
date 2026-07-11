@@ -6,7 +6,6 @@ export interface CommentsConnectorOptions {
   readonly token: string;
   readonly actorId: string;
   readonly maxCommentsPerDiscussion: number;
-  readonly minCommentScore: number;
 }
 
 export interface CommentsCollectionResult {
@@ -68,7 +67,6 @@ export class ApifyRedditCommentsConnector {
       body: JSON.stringify({
         postUrls: discussions.map((discussion) => discussion.url),
         maxComments: this.#options.maxCommentsPerDiscussion,
-        minScore: this.#options.minCommentScore,
         expandThreads: true,
         excludeDeleted: true,
       }),
@@ -105,15 +103,16 @@ export class ApifyRedditCommentsConnector {
       }
 
       const score = numberValue(item, "score", "upvotes", "ups");
-      if (score < this.#options.minCommentScore) continue;
       const id = normalizedId(stringValue(item, "id", "commentId", "comment_id", "name"));
       const url = stringValue(item, "permalink", "commentUrl", "comment_url");
+      const content = stringValue(item, "body", "contentText", "text", "content");
+      if (content.trim() === "") continue;
       comments.push({
         id: id || url,
         discussionId,
         parentId: stringValue(item, "parentId", "parent_id", "parentCommentId") || null,
         author: stringValue(item, "author", "username"),
-        content: stringValue(item, "body", "contentText", "text", "content"),
+        content,
         score,
         createdAt: isoDate(item["createdAt"] ?? item["created_utc"] ?? item["created_time"]),
         depth: numberValue(item, "depth", "commentDepth"),

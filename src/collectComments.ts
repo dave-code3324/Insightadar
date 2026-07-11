@@ -30,7 +30,6 @@ const main = async (): Promise<void> => {
     token: config.apifyToken,
     actorId: config.commentsActorId,
     maxCommentsPerDiscussion: config.maxCommentsPerDiscussion,
-    minCommentScore: config.minCommentScore,
   });
   const result = await connector.collect(sample);
   const comments = deduplicate(result.comments);
@@ -40,6 +39,17 @@ const main = async (): Promise<void> => {
   console.log(`Éléments Apify bruts : ${result.rawItems}`);
   console.log(`Commentaires uniques : ${comments.length}`);
   console.log(`Problèmes de mapping : ${result.mappingIssues}`);
+  console.log(`MIN_COMMENT_SCORE réservé à l’analyse ultérieure : ${config.minCommentScore}`);
+  console.log("Commentaires par discussion :");
+  const counts = new Map(sample.map((discussion) => [discussion.id, 0]));
+  for (const comment of comments) {
+    counts.set(comment.discussionId, (counts.get(comment.discussionId) ?? 0) + 1);
+  }
+  for (const discussion of sample) {
+    console.log(
+      `- ${discussion.id} [${discussion.subreddit}] ${discussion.title}: ${counts.get(discussion.id) ?? 0}`,
+    );
+  }
 };
 
 void main().catch((error: unknown) => {

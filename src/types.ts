@@ -38,6 +38,19 @@ export interface RelevanceReport {
   mainExclusionReasons: Array<{ reason: string; count: number }>;
   scoreDistribution: Record<string, number>;
   topDiscussions: ScoredDiscussion[];
+  likelyFalsePositives: ScoredDiscussion[];
+  likelyFalseNegatives: ScoredDiscussion[];
+  exclusionRuleContributions: Array<{ rule: string; count: number }>;
+  relevantBySubreddit: Record<string, number>;
+  relevantByQuery: Record<string, number>;
+  reviewSample: Array<{
+    title: string;
+    subreddit: string;
+    score: number;
+    decision: "retained" | "excluded";
+    positiveReasons: string[];
+    negativeReasons: string[];
+  }>;
 }
 
 export interface Market {

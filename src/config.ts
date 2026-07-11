@@ -44,6 +44,6 @@ export const loadConfig = (): AppConfig => {
       process.env.APIFY_COMMENTS_ACTOR_ID?.trim() || "crawlerbros~reddit-comment-scraper-pro",
     maxRelevantDiscussions: integerVariable("MAX_RELEVANT_DISCUSSIONS", 100, 1, 1000),
     maxCommentsPerDiscussion: integerVariable("MAX_COMMENTS_PER_DISCUSSION", 100, 1, 10_000),
-    minCommentScore: integerVariable("MIN_COMMENT_SCORE", 1, -10_000, 10_000_000),
+    minCommentScore: integerVariable("MIN_COMMENT_SCORE", -10_000, -10_000, 10_000_000),
   };
 };
