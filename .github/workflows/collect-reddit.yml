@@ -1,0 +1,47 @@
+name: Collect Reddit discussions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    name: Collect Financial Advisors discussions
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Collect Reddit discussions
+        run: npm run collect
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          APIFY_ACTOR_ID: red_crawler~reddit-search
+          APIFY_RESULTS_PER_QUERY: "50"
+
+      - name: Upload collected discussions
+        uses: actions/upload-artifact@v4
+        with:
+          name: financial-advisors-discussions
+          path: data/discussions.json
+          if-no-files-found: error
+          retention-days: 7
