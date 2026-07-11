@@ -8,9 +8,12 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
+    "test": "npm run build --silent && node --test dist/scoring/relevanceScorer.test.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "collect": "npm run build --silent && node dist/index.js"
+    "collect": "npm run build --silent && node dist/index.js",
+    "score": "npm run build --silent && node dist/score.js",
+    "collect:comments": "npm run build --silent && node dist/collectComments.js"
   },
   "dependencies": {
     "dotenv": "^17.2.3"

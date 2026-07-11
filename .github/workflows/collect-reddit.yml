@@ -31,6 +31,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Test
+        run: npm test
+
       - name: Collect Reddit discussions
         run: npm run collect
         env:
@@ -38,10 +41,27 @@ jobs:
           APIFY_ACTOR_ID: red_crawler~reddit-search
           APIFY_RESULTS_PER_QUERY: "50"
 
+      - name: Score discussion relevance
+        run: npm run score
+
+      - name: Collect comments from a 20-discussion sample
+        run: npm run collect:comments
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          APIFY_COMMENTS_ACTOR_ID: crawlerbros~reddit-comment-scraper-pro
+          MAX_RELEVANT_DISCUSSIONS: "20"
+          MAX_COMMENTS_PER_DISCUSSION: "50"
+          MIN_COMMENT_SCORE: "1"
+
       - name: Upload collected discussions
         uses: actions/upload-artifact@v4
         with:
-          name: financial-advisors-discussions
-          path: data/discussions.json
+          name: financial-advisors-research-data
+          path: |
+            data/discussions.json
+            data/discussions-scored.json
+            data/discussions-relevant.json
+            data/relevance-report.json
+            data/comments.json
           if-no-files-found: error
           retention-days: 7

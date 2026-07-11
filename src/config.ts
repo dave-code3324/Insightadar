@@ -14,17 +14,36 @@ export interface AppConfig {
   readonly apifyToken: string;
   readonly apifyActorId: string;
   readonly resultsPerQuery: number;
+  readonly commentsActorId: string;
+  readonly maxRelevantDiscussions: number;
+  readonly maxCommentsPerDiscussion: number;
+  readonly minCommentScore: number;
 }
 
-export const loadConfig = (): AppConfig => {
-  const resultsPerQuery = Number(process.env.APIFY_RESULTS_PER_QUERY ?? "50");
-  if (!Number.isInteger(resultsPerQuery) || resultsPerQuery < 1 || resultsPerQuery > 250) {
-    throw new Error("APIFY_RESULTS_PER_QUERY doit être un entier compris entre 1 et 250.");
+const integerVariable = (
+  name: string,
+  fallback: number,
+  minimum: number,
+  maximum: number,
+): number => {
+  const value = Number(process.env[name] ?? fallback);
+  if (!Number.isInteger(value) || value < minimum || value > maximum) {
+    throw new Error(`${name} doit être un entier compris entre ${minimum} et ${maximum}.`);
   }
+  return value;
+};
+
+export const loadConfig = (): AppConfig => {
+  const resultsPerQuery = integerVariable("APIFY_RESULTS_PER_QUERY", 50, 1, 250);
 
   return {
     apifyToken: requireEnvironmentVariable("APIFY_TOKEN"),
     apifyActorId: process.env.APIFY_ACTOR_ID?.trim() || "red_crawler~reddit-search",
     resultsPerQuery,
+    commentsActorId:
+      process.env.APIFY_COMMENTS_ACTOR_ID?.trim() || "crawlerbros~reddit-comment-scraper-pro",
+    maxRelevantDiscussions: integerVariable("MAX_RELEVANT_DISCUSSIONS", 100, 1, 1000),
+    maxCommentsPerDiscussion: integerVariable("MAX_COMMENTS_PER_DISCUSSION", 100, 1, 10_000),
+    minCommentScore: integerVariable("MIN_COMMENT_SCORE", 1, -10_000, 10_000_000),
   };
 };
