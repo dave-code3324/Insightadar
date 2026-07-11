@@ -1,0 +1,26 @@
+{
+  "name": "insight-radar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Collecte de discussions publiques pour valider des opportunités de marché.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "collect": "npm run build --silent && node dist/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.39.0",
+    "prettier": "^3.6.2",
+    "typescript-eslint": "^8.46.0",
+    "typescript": "^5.8.0"
+  }
+}
