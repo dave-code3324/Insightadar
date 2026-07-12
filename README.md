@@ -56,6 +56,7 @@ Après le scoring :
 
 ```bash
 npm run collect:comments
+npm run pilot:generate
 ```
 
 Seules les discussions pertinentes sont envoyées à l’Actor de commentaires. La commande normalise, filtre et déduplique les commentaires dans `data/comments.json`.
@@ -98,3 +99,26 @@ MIN_COMMENT_SCORE=-10000
 Le premier test conserve tous les scores de commentaires. `MIN_COMMENT_SCORE` est réservé à une future étape d’analyse et n’est pas appliqué pendant la collecte brute. Seuls les doublons et les contenus vides sont retirés.
 
 Le workflow GitHub Actions applique automatiquement ces limites et publie les cinq fichiers JSON comme artefact pendant 7 jours.
+
+## Lot pilote concierge
+
+Le premier lot manuel se trouve dans `validation/pilot/batch-001/`.
+
+1. Ouvre `prospects-input.csv` dans Excel, Numbers ou Google Sheets.
+2. Complète une ligne par prospect réel avec : raison sociale, URL Pappers, dirigeant, type et date de l’événement, autre source publique et notes factuelles.
+3. Conserve les en-têtes et le format de date `AAAA-MM-JJ`.
+4. Exporte ou enregistre le fichier au format CSV UTF-8 au même emplacement.
+5. Lance :
+
+```bash
+npm run pilot:generate
+```
+
+La commande refuse les lignes incomplètes ou les URLs non valides et régénère :
+
+- `prospect-cards.md` ;
+- `outreach-messages.md` ;
+- `batch-summary.md` ;
+- `tracking.csv`.
+
+Le fichier réel contient 15 emplacements vides, répartis par groupes de cinq entre `CGP-1`, `CGP-2` et `CGP-3`. Remplace ces libellés dans le tracking avant l’envoi. Les données fictives utilisées par les tests restent exclusivement dans le code de test et ne sont jamais écrites dans le lot réel.
