@@ -1,31 +1,19 @@
 # Résumé — Batch 001
 
-- **Prospects générés :** 0/15
-- **Lignes à compléter ou corriger :** 15
-- **Score moyen :** 0/100
-- **Confiance élevée (≥ 75) :** 0
+- **Prospects générés :** 15/15
+- **Lignes à compléter ou corriger :** 0
+- **Score moyen :** 76.7/100
+- **Confiance élevée (≥ 75) :** 15
 
 ## Répartition par événement
 
-Aucun événement réel complet.
+- Création récente d'une holding: 5
+- Fusion: 5
+- Cession de fonds de commerce: 5
 
 ## Lignes à compléter
 
-- Ligne 2: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 3: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 4: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 5: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 6: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 7: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 8: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 9: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 10: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 11: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 12: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 13: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 14: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 15: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
-- Ligne 16: company_name, pappers_url, executive_name, event_type, event_date AAAA-MM-JJ, source_url
+Aucune.
 
 ## Principales limites
 
@@ -36,7 +24,7 @@ Aucun événement réel complet.
 
 ## Recommandations avant envoi
 
-1. Obtenir 15 lignes complètes, récentes et réparties entre plusieurs types d’événements.
+1. Le lot contient 15 lignes complètes ; ne conserver que celles qui passent la relecture manuelle finale.
 2. Ouvrir chaque source et vérifier identité, date et rôle du dirigeant.
 3. Écarter toute fiche ambiguë ou de confiance inférieure à 60.
 4. Remplacer les libellés CGP-1 à CGP-3 par les noms des participants.
