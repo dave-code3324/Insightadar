@@ -57,6 +57,8 @@ Après le scoring :
 ```bash
 npm run collect:comments
 npm run pilot:generate
+npm run email:generate
+npm run email:send
 ```
 
 Seules les discussions pertinentes sont envoyées à l’Actor de commentaires. La commande normalise, filtre et déduplique les commentaires dans `data/comments.json`.
@@ -122,3 +124,29 @@ La commande refuse les lignes incomplètes ou les URLs non valides et régénèr
 - `tracking.csv`.
 
 Le fichier réel contient 15 emplacements vides, répartis par groupes de cinq entre `CGP-1`, `CGP-2` et `CGP-3`. Remplace ces libellés dans le tracking avant l’envoi. Les données fictives utilisées par les tests restent exclusivement dans le code de test et ne sont jamais écrites dans le lot réel.
+
+## E-mails du pilote
+
+Génère un digest professionnel distinct pour chaque groupe de cinq prospects :
+
+```bash
+npm run email:generate
+```
+
+Les versions HTML et texte sont écrites dans `validation/pilot/batch-001/emails/`. Cette commande n’envoie rien.
+
+Pour automatiser l’envoi, configure les variables `SMTP_*`, `EMAIL_FROM` et `CGP_RECIPIENTS_JSON` dans `.env`. Avec Gmail, `SMTP_PASSWORD` doit être un mot de passe d’application dédié, jamais le mot de passe du compte.
+
+Vérifie d’abord la configuration en simulation :
+
+```bash
+npm run email:send
+```
+
+Puis autorise explicitement l’envoi réel :
+
+```bash
+npm run email:send -- --confirm
+```
+
+La commande régénère les fichiers depuis `prospects-input.csv`, envoie un digest par CGP et ne journalise ni mot de passe ni adresse de destinataire. Vérifie manuellement les sources et remplace les libellés `CGP-1` à `CGP-3` avant le premier envoi réel.

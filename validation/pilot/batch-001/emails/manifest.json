@@ -1,0 +1,35 @@
+[
+  {
+    "cgp": "CGP-1",
+    "subject": "InsightRadar — 5 opportunités à examiner | Batch 001",
+    "prospectIds": [
+      "BATCH-001-P01",
+      "BATCH-001-P02",
+      "BATCH-001-P03",
+      "BATCH-001-P04",
+      "BATCH-001-P05"
+    ]
+  },
+  {
+    "cgp": "CGP-2",
+    "subject": "InsightRadar — 5 opportunités à examiner | Batch 001",
+    "prospectIds": [
+      "BATCH-001-P06",
+      "BATCH-001-P07",
+      "BATCH-001-P08",
+      "BATCH-001-P09",
+      "BATCH-001-P10"
+    ]
+  },
+  {
+    "cgp": "CGP-3",
+    "subject": "InsightRadar — 5 opportunités à examiner | Batch 001",
+    "prospectIds": [
+      "BATCH-001-P11",
+      "BATCH-001-P12",
+      "BATCH-001-P13",
+      "BATCH-001-P14",
+      "BATCH-001-P15"
+    ]
+  }
+]

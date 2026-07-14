@@ -8,23 +8,27 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
-    "test": "npm run build --silent && node --test dist/scoring/relevanceScorer.test.js dist/pilot/pilotGenerator.test.js",
+    "test": "npm run build --silent && node --test dist/scoring/relevanceScorer.test.js dist/pilot/pilotGenerator.test.js dist/email/digestGenerator.test.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "collect": "npm run build --silent && node dist/index.js",
     "score": "npm run build --silent && node dist/score.js",
     "collect:comments": "npm run build --silent && node dist/collectComments.js",
-    "pilot:generate": "npm run build --silent && node dist/pilot/generate.js"
+    "pilot:generate": "npm run build --silent && node dist/pilot/generate.js",
+    "email:generate": "npm run build --silent && node dist/email/generate.js",
+    "email:send": "npm run build --silent && node dist/email/send.js"
   },
   "dependencies": {
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "nodemailer": "^9.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
     "@types/node": "^24.0.0",
+    "@types/nodemailer": "^7.0.0",
     "eslint": "^9.39.0",
     "prettier": "^3.6.2",
-    "typescript-eslint": "^8.46.0",
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.46.0"
   }
 }
